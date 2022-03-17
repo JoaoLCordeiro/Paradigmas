@@ -1,12 +1,14 @@
+//Exercício A da lista de Colecoes
+
 class Array10
 {
 	private int array[] = new int[10];
 
-	public void adicionaElemento (int n, int i)
+	public void adicionaElemento (int n, int i)				//adiciona um elemento no vetor de 10 posições
 	{
 		if ((i < 0) || (i > 9))
 		{
-			System.out.println("ERRO: índice inválido");
+			System.out.println("ERRO: índice inválido");	//caso o índice não esteja no intervalo do vetor
 			return;
 		}
 
@@ -15,18 +17,18 @@ class Array10
 		return;
 	}
 
-	public int retornaElemento (int i)
+	public int retornaElemento (int i)						//retorna o valor do elemento na posição
 	{
 		if ((i < 0) || (i > 9))
 		{
-			System.out.println("ERRO: índice inválido");
+			System.out.println("ERRO: índice inválido");	//caso o índice não esteja no intervalo do vetor
 			return (-1);
 		}
 
 		return (this.array[i]);
 	}
 
-	public int buscaElemento (int n)
+	public int buscaElemento (int n)						//procura um elemento e, se encontra, retorna o índice, se não, retorna -1
 	{
 		int i = 0;
 		boolean achou = false;
@@ -45,7 +47,7 @@ class Array10
 			return (-1);
 	}
 
-	public void ordenaElementos ()
+	public void ordenaElementos ()							//ordena os elementos do vetor usando o Bubble Sort
 	{
 		int i,j,temp;
 		for (i = 0 ; i < 10 ; i++)
@@ -60,7 +62,7 @@ class Array10
 			}
 	}
 
-	public void imprimeElementos ()
+	public void imprimeElementos ()							//imprime todos os elementos do vetor
 	{
 		int i;
 		for (i = 0 ; i < 10 ; i++)

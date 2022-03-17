@@ -1,99 +1,137 @@
+//Exercício B da lista de Colecoes
+
 class Fracao
 {
 	private int cima;
 	private int baixo;
 
-	public Fracao adicionaElemento (int n, int i)
+	public Fracao ()						//possui dois construtores: um que inicia sem valores e um que inicia com os valores dados
 	{
-		if ((i < 0) || (i > 9))
-		{
-			System.out.println("ERRO: índice inválido");
-			return;
-		}
+	}
 
-		this.array[i] = n;
+	public Fracao (int cima, int baixo)
+	{
+		this.cima  = cima;
+		this.baixo = baixo;
+	}
 
+	public int getBaixo ()					//funções get e set para os números de baixo e de cima da fração
+	{
+		return this.baixo;
+	}
+
+	public void setBaixo (int n)
+	{
+		this.baixo = n;
 		return;
 	}
 
-	public int retornaElemento (int i)
+	public int getCima ()
 	{
-		if ((i < 0) || (i > 9))
-		{
-			System.out.println("ERRO: índice inválido");
-			return (-1);
-		}
-
-		return (this.array[i]);
+		return this.cima;
 	}
 
-	public int buscaElemento (int n)
+	public void setCima (int n)
 	{
-		int i = 0;
-		boolean achou = false;
-
-		while ((i < 10)&&(! achou))
-		{
-			if (this.array[i] == n)
-				achou = true;
-
-			i++;
-		}
-
-		if (achou)
-			return (i-1);
-		else
-			return (-1);
+		this.cima = n;
+		return;
 	}
 
-	public void ordenaElementos ()
+	public void imprimeFracao ()			//função que imprime a fração
 	{
-		int i,j,temp;
-		for (i = 0 ; i < 10 ; i++)
-			for (j = 0 ; j < 9-i ; j++)
-			{
-				if (this.array[j] > this.array[j+1])
-				{
-					temp 		= this.array[j];
-					this.array[j] 	= this.array[j+1];
-					this.array[j+1]	= temp;
-				}
-			}
+		System.out.println("A fração é: "+this.getCima()+"/"+this.getBaixo());
 	}
 
-	public void imprimeElementos ()
+	public Fracao somaFracao (Fracao fracao2)		//soma frações
 	{
-		int i;
-		for (i = 0 ; i < 10 ; i++)
-			System.out.print(array[i]+"	");
-		System.out.println("");
+		Fracao fracaoR = new Fracao();
+
+		int baixoR = this.getBaixo() * fracao2.getBaixo();												//multiplica os dois de baixo e
+		int cimaR  = (this.getCima() * fracao2.getBaixo()) + (this.getBaixo() * fracao2.getCima());		//soma os de cima com peso dos de baixo
+
+		fracaoR.setBaixo (baixoR);
+		fracaoR.setCima  (cimaR);
+
+		return fracaoR;											
+	}
+
+	public Fracao multFracao (Fracao fracao2)		//multiplica frações
+	{
+		Fracao fracaoR = new Fracao();
+
+		int baixoR = this.getBaixo() * fracao2.getBaixo();		//multiplica em cima e multiplica em baixo
+		int cimaR  = this.getCima()  * fracao2.getCima();
+
+		fracaoR.setBaixo (baixoR);
+		fracaoR.setCima  (cimaR);
+
+		return fracaoR;						
+	}
+
+	public Fracao subFracao (Fracao fracao2)		//subtrai frações
+	{
+		Fracao fracaoR = new Fracao();
+
+		int baixoR = this.getBaixo() * fracao2.getBaixo();		//faz a mesma coisa que a soma mas subtrai
+		int cimaR  = (this.getCima() * fracao2.getBaixo()) - (this.getBaixo() * fracao2.getCima());
+
+		fracaoR.setBaixo (baixoR);
+		fracaoR.setCima  (cimaR);
+
+		return fracaoR;											
+	}
+
+	public Fracao divFracao (Fracao fracao2)		//divide frações
+	{
+		Fracao fracaoR = new Fracao();
+
+		int baixoR = this.getBaixo() * fracao2.getCima();		//inverte a segunda fração e multiplica
+		int cimaR  = this.getCima()  * fracao2.getBaixo();
+
+		fracaoR.setBaixo (baixoR);
+		fracaoR.setCima  (cimaR);
+
+		return fracaoR;						
 	}
 }
 
-public class exerA
+public class exerB
 {
 	public static void main (String args[])
 	{
 		//bora testar se a classe funciona :)
 		
-		Array10 array = new Array10();
+		Fracao fracao1 = new Fracao();
+		fracao1.setCima(1);
+		fracao1.setBaixo(2);
 
-		int i;
-		for (i = 0 ; i < 10 ; i++)
-		{
-			array.adicionaElemento(10-i,i);
-		}
+		Fracao fracao2 = new Fracao(3,4);
 
-		for (i = 0 ; i < 10 ; i++)
-		{
-			System.out.println("Elemento "+i+":	"+array.retornaElemento(i));
-		}
+		fracao1.imprimeFracao();
+		System.out.println("");			
+		fracao2.imprimeFracao();
+		System.out.println("");			
 
-		System.out.println("Elemento 3 está em "+array.buscaElemento(3));
-		System.out.println("Elemento 7 está em "+array.buscaElemento(7));
+		Fracao fracao3 = new Fracao (0,0);
 
-		array.ordenaElementos();
+		System.out.println("Soma de Fração");
+		fracao3 = fracao1.somaFracao(fracao2);
+		fracao3.imprimeFracao();
+		System.out.println("");			
 
-		array.imprimeElementos();
+		System.out.println("Multiplicação de Fração");
+		fracao3 = fracao1.multFracao(fracao2);
+		fracao3.imprimeFracao();
+		System.out.println("");			
+
+		System.out.println("Subtração de Fração");
+		fracao3 = fracao1.subFracao(fracao2);
+		fracao3.imprimeFracao();
+		System.out.println("");			
+
+		System.out.println("Divisão de Fração");
+		fracao3 = fracao1.divFracao(fracao2);
+		fracao3.imprimeFracao();
+		System.out.println("");			
 	}
 }

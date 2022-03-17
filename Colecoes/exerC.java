@@ -1,3 +1,5 @@
+//Exercício C da lista de Colecoes
+
 import java.util.*;
 import java.io.*;
 
@@ -11,7 +13,7 @@ class LeitorString
 		String string 	= new String();
 		string 		= teclado.readLine();
 
-		while (! (string.equals("fim")))
+		while (! (string.equals("fim")))					//adiciona novos elementos ao Vector até ler "fim"
 		{
 			this.stringVector.addElement(string); 
 			string 	= teclado.readLine();
@@ -21,7 +23,7 @@ class LeitorString
 		return;
 	}
 
-	public void imprimeElementos ()
+	public void imprimeElementos ()							//imprime todos os elementos do Vector
 	{
 		int i;
 		System.out.println("");
@@ -38,7 +40,7 @@ public class exerC
 {
 	public static void main (String args[]) throws IOException
 	{
-		LeitorString leitor = new LeitorString();
+		LeitorString leitor = new LeitorString();		//testa a função :)
 
 		leitor.adicionaElementos();
 		leitor.imprimeElementos();
